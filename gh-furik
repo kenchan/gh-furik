@@ -1,35 +1,21 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Hello gh-furik!"
+FROM=`date +%FT00:00:00%z`
+TO=`date +%FT00:00:00%z -d tomorrow`
 
-# Snippets to help get started:
+JQ_QUERY="
+[
+  .[] |
+  select((.created_at >= \"$FROM\") and (.created_at <= \"$TO\") and (.type | startswith(\"Pull\") or startswith(\"Issue\"))) |
+  {\"type\": .type, \"repo\": .repo.name, \"title\": (.payload.pull_request // .payload.issue).title, \"url\": (.payload.review // .payload.comment // .payload.pull_request // .payload.issue).html_url}
+] |
+group_by(.type, .url) |
+flatten |
+unique |
+map(\"- \" + .repo + \": [\" + .type[0:-5] + \"](\" + .url + \") \" + .title) |
+.[]"
 
-# Determine if an executable is in the PATH
-# if ! type -p ruby >/dev/null; then
-#   echo "Ruby not found on the system" >&2
-#   exit 1
-# fi
+USER=$(gh api user -q .login "$@")
 
-# Pass arguments through to another command
-# gh issue list "$@" -R cli/cli
-
-# Using the gh api command to retrieve and format information
-# QUERY='
-#   query($endCursor: String) {
-#     viewer {
-#       repositories(first: 100, after: $endCursor) {
-#         nodes {
-#           nameWithOwner
-#           stargazerCount
-#         }
-#       }
-#     }
-#   }
-# '
-# TEMPLATE='
-#   {{- range $repo := .data.viewer.repositories.nodes -}}
-#     {{- printf "name: %s - stargazers: %v\n" $repo.nameWithOwner $repo.stargazerCount -}}
-#   {{- end -}}
-# '
-# exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}"
+exec gh api users/kenchan/events "$@" --paginate -q "$JQ_QUERY"
