@@ -12,7 +12,7 @@ JQ_QUERY="
 ] | 
 group_by(.repo) |
 map({repo: .[0].repo, activities: .}) |
-map(\"\n### \" + .repo +\"\n\", (.activities | group_by(.type, .url)[] | flatten | unique | map(\"- [\" + .type[0:-5] + \"](\" + .url + \") \" + .title))) |
+map(\"\n### \" + .repo +\"\n\", (.activities | group_by(.type, .url)[] | flatten | unique | map(\"- [\" + .type[0:-5] + \"](\" + .url + \"): \" + .title))) |
 flatten |
 .[]"
 

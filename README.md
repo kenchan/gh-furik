@@ -7,13 +7,13 @@ $ gh furik
 
 ### kenchan/gh-furik
 
-- [Issues](https://github.com/kenchan/gh-furik/issues/1) 1.0 Release
+- [Issues](https://github.com/kenchan/gh-furik/issues/1): 1.0 Release
 
 ### pepabo/colormeshop-wp-plugin
 
-- [IssueComment](https://github.com/pepabo/colormeshop-wp-plugin/pull/154#issuecomment-1100030256) Bump phpcompatibility/phpcompatibility-wp from 2.1.2 to 2.1.3
-- [IssueComment](https://github.com/pepabo/colormeshop-wp-plugin/pull/154#issuecomment-1100030509) Bump phpcompatibility/phpcompatibility-wp from 2.1.2 to 2.1.3
-- [PullRequestReview](https://github.com/pepabo/colormeshop-wp-plugin/pull/152#pullrequestreview-830114010) Bump squizlabs/php_codesniffer from 3.6.0 to 3.6.1
+- [IssueComment](https://github.com/pepabo/colormeshop-wp-plugin/pull/154#issuecomment-1100030256): Bump phpcompatibility/phpcompatibility-wp from 2.1.2 to 2.1.3
+- [IssueComment](https://github.com/pepabo/colormeshop-wp-plugin/pull/154#issuecomment-1100030509): Bump phpcompatibility/phpcompatibility-wp from 2.1.2 to 2.1.3
+- [PullRequestReview](https://github.com/pepabo/colormeshop-wp-plugin/pull/152#pullrequestreview-830114010): Bump squizlabs/php_codesniffer from 3.6.0 to 3.6.1
 ```
 
 ## Installation
