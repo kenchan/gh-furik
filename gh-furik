@@ -9,11 +9,11 @@ JQ_QUERY="
   .[] |
   select((.created_at >= \"$FROM\") and (.created_at <= \"$TO\") and (.type | startswith(\"Pull\") or startswith(\"Issue\"))) |
   {\"type\": .type, \"repo\": .repo.name, \"title\": (.payload.pull_request // .payload.issue).title, \"url\": (.payload.review // .payload.comment // .payload.pull_request // .payload.issue).html_url}
-] |
-group_by(.type, .url) |
+] | 
+group_by(.repo) |
+map({repo: .[0].repo, activities: .}) |
+map(\"\n### \" + .repo +\"\n\", (.activities | group_by(.type, .url)[] | flatten | unique | map(\"- [\" + .type[0:-5] + \"](\" + .url + \") \" + .title))) |
 flatten |
-unique |
-map(\"- \" + .repo + \": [\" + .type[0:-5] + \"](\" + .url + \") \" + .title) |
 .[]"
 
 USER=$(gh api user -q .login "$@")
