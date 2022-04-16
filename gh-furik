@@ -3,6 +3,25 @@ set -e
 
 FROM=`date +%FT00:00:00%z`
 TO=`date +%FT00:00:00%z -d tomorrow`
+HOSTNAME="github.com"
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --hostname)
+      HOSTNAME="$2"
+      shift
+      ;;
+    --from)
+      FROM="$2"
+      shift
+      ;;
+    --to)
+      TO="$2"
+      shift
+      ;;
+  esac
+  shift
+done
 
 JQ_QUERY="
 [
@@ -16,6 +35,6 @@ map(\"\n### \" + .repo +\"\n\", (.activities | group_by(.type, .url)[] | flatten
 flatten |
 .[]"
 
-USER=$(gh api user -q .login "$@")
+USER=$(gh api user -q .login --hostname "$HOSTNAME")
 
-exec gh api users/kenchan/events "$@" --paginate -q "$JQ_QUERY"
+exec gh api users/kenchan/events --hostname "$HOSTNAME" --paginate -q "$JQ_QUERY"

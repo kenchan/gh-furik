@@ -24,6 +24,8 @@ gh extension install kenchan/gh-furik
 
 ## Usage
 
+Show your yesterday's activities.
+
 ```
 gh furik
 ```
@@ -33,6 +35,15 @@ If you use GitHub Enterprise Server, use `--hostname` option.
 ```
 gh furik --hostname your.ghes.hostname
 ```
+
+
+The date range can be changed with `--from` and `--to`.
+
+```
+gh furik --from 2022-04-01 --to 2022-04-10
+```
+
+This extension uses the [GitHub Events API](https://docs.github.com/ja/rest/reference/activity#events). There is a limit to the amount of data that can be get with that API.
 
 ## Related Project
 
