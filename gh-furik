@@ -37,4 +37,4 @@ flatten |
 
 USER=$(gh api user -q .login --hostname "$HOSTNAME")
 
-exec gh api users/kenchan/events --hostname "$HOSTNAME" --paginate -q "$JQ_QUERY"
+exec gh api users/"$USER"/events --hostname "$HOSTNAME" --paginate -q "$JQ_QUERY"
