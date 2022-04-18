@@ -2,7 +2,7 @@
 set -e
 
 FROM=`date +%FT00:00:00%z`
-TO=`date +%FT00:00:00%z -d tomorrow`
+TO=`date +%FT23:59:59%z`
 HOSTNAME="github.com"
 
 while [ $# -gt 0 ]; do
