@@ -43,7 +43,7 @@ The date range can be changed with `--from` and `--to`.
 gh furik --from 2022-04-01 --to 2022-04-10
 ```
 
-This extension uses the [GitHub Events API](https://docs.github.com/ja/rest/reference/activity#events). There is a limit to the amount of data that can be get with that API.
+This extension uses the [GitHub GraphQL API](https://docs.github.com/en/graphql) to fetch your activities including PR reviews, comments, and created issues/PRs with pagination support.
 
 ## Related Project
 
