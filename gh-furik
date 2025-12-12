@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-# プラットフォーム対応の昨日の日付取得
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # macOS (BSD date)
   FROM=$(date -v-1d +%Y-%m-%dT00:00:00Z)
