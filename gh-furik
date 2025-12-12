@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-FROM=$(date -d "yesterday" +%Y-%m-%dT00:00:00Z)
+# プラットフォーム対応の昨日の日付取得
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS (BSD date)
+  FROM=$(date -v-1d +%Y-%m-%dT00:00:00Z)
+else
+  # Linux (GNU date)
+  FROM=$(date -d "yesterday" +%Y-%m-%dT00:00:00Z)
+fi
 TO=$(date +%Y-%m-%dT23:59:59Z)
 HOSTNAME="github.com"
 ORG=""
