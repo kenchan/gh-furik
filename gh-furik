@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # macOS (BSD date)
-  FROM=$(date -v-1d +%Y-%m-%dT00:00:00Z)
-else
-  # Linux (GNU date)
+if date --version >/dev/null 2>&1; then
+  # GNU date
   FROM=$(date -d "yesterday" +%Y-%m-%dT00:00:00Z)
+else
+  # BSD date
+  FROM=$(date -v-1d +%Y-%m-%dT00:00:00Z)
 fi
 TO=$(date +%Y-%m-%dT23:59:59Z)
 HOSTNAME="github.com"
